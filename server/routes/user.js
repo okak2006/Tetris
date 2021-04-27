@@ -21,7 +21,7 @@ router.post('/', [
     const { name, email, password } = req.body; 
 
     try {
-        
+
     } catch (err) {
         console.error(err);
     }
