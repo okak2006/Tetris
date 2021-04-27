@@ -1,0 +1,3 @@
+{
+    "mongoURI": "mongodb+srv://rabbitBear:bear716@cluster0.gpkpo.mongodb.net/tetris?retryWrites=true&w=majority"
+}
