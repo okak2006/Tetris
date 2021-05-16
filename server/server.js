@@ -3,7 +3,8 @@ const cors = require('cors');
 const connectDB = require('./config/db')
 
 // Import route files
-const userRoute = require('./routes/user')
+const userRoute = require('./routes/user');
+const authRoute = require('./routes/auth')
 
 const app = express(); 
 app.use(express.json(), cors())
@@ -14,7 +15,8 @@ app.listen(PORT, () => {
     console.log('listening on 5000')
 });
 
-// Setup Routes
-app.use(userRoute)
+// Setup Route
+app.use('/api/users', userRoute);
+app.use('/api/auth', authRoute);
 
 connectDB();
