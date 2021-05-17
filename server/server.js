@@ -5,6 +5,7 @@ const connectDB = require('./config/db')
 // Import route files
 const userRoute = require('./routes/user');
 const authRoute = require('./routes/auth')
+const scoreRoute = require('./routes/score');
 
 const app = express(); 
 app.use(express.json(), cors())
@@ -18,5 +19,6 @@ app.listen(PORT, () => {
 // Setup Route
 app.use('/api/users', userRoute);
 app.use('/api/auth', authRoute);
+app.use('/api/scores', scoreRoute);
 
 connectDB();
