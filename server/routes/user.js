@@ -1,6 +1,6 @@
 const config = require('config')
 const express = require('express');
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
@@ -43,7 +43,7 @@ router.post('/', [
 
         //encrypt password using Bcrypt. genSalt returns promise. Salt is a random string that makes hash unpredictable
         const salt = await bcrypt.genSalt(10)
-        user.password = await brcypt.hash(password, salt)
+        user.password = await bcrypt.hash(password, salt)
 
         //save user to the database
         await user.save();

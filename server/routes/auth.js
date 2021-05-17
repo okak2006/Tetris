@@ -1,9 +1,10 @@
 const config = require('config')
 const express = require('express');
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ const router = express.Router();
 //@access Public
 //route   protected through auth middlware
 //To-do don't forget to import auth mw
-route.get('/', auth, async (req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
         //auth mw sets req.user after jwt is decdoed. We don't want to send back the user password to frontend
         const user = await User.findById(req.user.id).select('-password');
@@ -46,7 +47,7 @@ router.post('/', [
             return res.status(400).json({ errors: [ {msg: 'User does not exist or there is no matching credentials'} ]});
         };
 
-        const isMatch = await brycpt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch) {
             return res.status(400).json({ errors: [ {msg: 'User does not exist or there is no matching credentials'} ]});
         }
